@@ -9,5 +9,4 @@ const currentYear = new Date().getFullYear();
 
 }
 
-
-  export default Footer;
+export default Footer;
