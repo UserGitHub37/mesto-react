@@ -2,7 +2,7 @@ import React from 'react';
 import api from '../utils/api';
 import Card from './Card';
 
-function Main ({onEditProfile, onAddPlace, onEditAvatar}) {
+function Main ({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
@@ -24,12 +24,7 @@ function Main ({onEditProfile, onAddPlace, onEditAvatar}) {
   React.useEffect(() => {
     api.getInitialCards()
     .then((initialCards) => {
-      setCards(initialCards.map((card) => ({
-        src: card.link,
-        title: card.name,
-        likes: card.likes,
-        key: card._id
-      })));
+      setCards(initialCards);
     })
     .catch(err => console.log(err));
   }, []);
@@ -55,7 +50,7 @@ function Main ({onEditProfile, onAddPlace, onEditAvatar}) {
           <ul className="elements__wrapper">
 
             {cards.map((card) => (
-              <Card {...card}/>
+              <Card key={card._id} card={card} onCardClick={onCardClick}/>
             ))}
 
           </ul>
@@ -66,5 +61,4 @@ function Main ({onEditProfile, onAddPlace, onEditAvatar}) {
 
 }
 
-
-  export default Main;
+export default Main;
