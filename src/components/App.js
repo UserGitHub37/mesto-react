@@ -5,6 +5,8 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import api from '../utils/api';
+import { CurrentUserContext } from '../../src/contexts/CurrentUserContext';
 
 
 function App() {
@@ -14,6 +16,16 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard ] = React.useState(null);
+  const [currentUser, setCurrentUser ] = React.useState({});
+
+
+  React.useEffect(() => {
+    api.getUserInfo()
+    .then((userData) => {
+      setCurrentUser(userData);
+    })
+    .catch(err => console.log(err));
+  }, []);
 
 
   function closeAllPopups() {
@@ -42,8 +54,9 @@ function App() {
     setSelectedCard(card);
   }
 
+
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <Header />
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
       <Footer />
@@ -74,7 +87,7 @@ function App() {
       <PopupWithForm title='Вы уверены?' name='confirmation' isOpen={isDeleteCardPopupOpen} buttonName='Да' onClose={closeAllPopups}/>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 
