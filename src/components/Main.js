@@ -14,6 +14,15 @@ function Main ({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
    */
   const [cards, setCards] = React.useState([]);
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch(err => console.log(err));
+}
+
 /*
   React.useEffect(() => {
     api.getUserInfo()
@@ -55,7 +64,7 @@ function Main ({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
           <ul className="elements__wrapper">
 
             {cards.map((card) => (
-              <Card key={card._id} card={card} onCardClick={onCardClick}/>
+              <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={handleCardLike}/>
             ))}
 
           </ul>

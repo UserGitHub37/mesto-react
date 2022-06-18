@@ -48,7 +48,7 @@ class Api {
   }
 
 
-  setLike(cardId) {
+  _setLike(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
         method: 'PUT',
         headers: this._headers
@@ -56,11 +56,16 @@ class Api {
   }
 
 
-  removeLike(cardId) {
+  _removeLike(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
         method: 'DELETE',
         headers: this._headers
     }).then(this._checkPromise);
+  }
+
+
+  changeLikeCardStatus(cardId, isLiked) {
+    return isLiked ? this._setLike(cardId) : this._removeLike(cardId);
   }
 
 
