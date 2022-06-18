@@ -23,6 +23,15 @@ function Main ({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
     .catch(err => console.log(err));
 }
 
+
+function handleCardDelete(card) {
+  api.deleteCard(card._id).then(() => {
+    setCards((state) => state.filter((c) => c._id !== card._id));
+  })
+  .catch(err => console.log(err));
+}
+
+
 /*
   React.useEffect(() => {
     api.getUserInfo()
@@ -64,7 +73,7 @@ function Main ({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
           <ul className="elements__wrapper">
 
             {cards.map((card) => (
-              <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={handleCardLike}/>
+              <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
             ))}
 
           </ul>
