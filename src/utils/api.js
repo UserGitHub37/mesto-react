@@ -22,7 +22,7 @@ class Api {
   }
 
 
-  changeUserInfo(data) {
+  setUserInfo(data) {
     return fetch(`${this._baseUrl}users/me`, {
         method: 'PATCH',
         headers: this._headers,
@@ -31,7 +31,7 @@ class Api {
   }
 
 
-  changeAvatar(data) {
+  setAvatar(data) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
         method: 'PATCH',
         headers: this._headers,
