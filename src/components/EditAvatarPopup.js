@@ -18,7 +18,7 @@ function EditAvatarPopup ({ isOpen, onClose, onUpdateAvatar }) {
       <input ref={inputRef} className="popup__input popup__input_field_image-profile" id="link-profile-input" type="url" name="profileImageLink" placeholder="Ссылка на фото профиля" required/>
       <span className="popup__error-message link-profile-input-error"></span>
     </PopupWithForm>
-  )
+  );
 
 }
 
