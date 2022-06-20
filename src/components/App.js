@@ -6,6 +6,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import api from '../utils/api';
 import { CurrentUserContext } from '../../src/contexts/CurrentUserContext';
 
@@ -16,8 +17,8 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard ] = React.useState(null);
-  const [currentUser, setCurrentUser ] = React.useState({});
+  const [selectedCard, setSelectedCard] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState({});
 
 
   React.useEffect(() => {
@@ -58,8 +59,18 @@ function App() {
 
   function handleUpdateUser (inputData) {
     api.setUserInfo(inputData)
-    .then((serverData) => {
-      setCurrentUser(serverData);
+    .then((userData) => {
+      setCurrentUser(userData);
+      closeAllPopups();
+    })
+    .catch(err => console.log(err));
+  }
+
+
+  function handleUpdateAvatar (inputData) {
+    api.setUserAvatar(inputData)
+    .then((userData) => {
+      setCurrentUser(userData);
       closeAllPopups();
     })
     .catch(err => console.log(err));
@@ -72,10 +83,7 @@ function App() {
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
       <Footer />
 
-      <PopupWithForm title='Обновить аватар' name='avatar' isOpen={isEditAvatarPopupOpen} buttonName='Сохранить' onClose={closeAllPopups}>
-        <input className="popup__input popup__input_field_image-profile" id="link-profile-input" type="url" name="profileImageLink" placeholder="Ссылка на фото профиля" required/>
-        <span className="popup__error-message link-profile-input-error"></span>
-      </PopupWithForm>
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
 
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
 
