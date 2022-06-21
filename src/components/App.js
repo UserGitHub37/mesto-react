@@ -21,6 +21,9 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const [avatarUpdateButtonName, setAvatarUpdateButtonName] = React.useState('Сохранить');
+  const [userUpdateButtonName, setUserUpdateButtonName] = React.useState('Сохранить');
+  const [placeUpdateButtonName, setPlaceUpdateButtonName] = React.useState('Создать');
 
 
   React.useEffect(() => {
@@ -83,33 +86,45 @@ function App() {
   }
 
 
-  function handleUpdateUser (inputData) {
-    api.setUserInfo(inputData)
-    .then((userData) => {
-      setCurrentUser(userData);
-      closeAllPopups();
-    })
-    .catch(err => console.log(err));
-  }
-
-
   function handleUpdateAvatar (inputData) {
+    setAvatarUpdateButtonName('Сохранение...');
     api.setUserAvatar(inputData)
     .then((userData) => {
       setCurrentUser(userData);
       closeAllPopups();
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .finally(() => {
+      setAvatarUpdateButtonName('Сохранить');
+    });
+  }
+
+
+  function handleUpdateUser (inputData) {
+    setUserUpdateButtonName('Сохранение...');
+    api.setUserInfo(inputData)
+    .then((userData) => {
+      setCurrentUser(userData);
+      closeAllPopups();
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      setUserUpdateButtonName('Сохранить');
+    });
   }
 
 
   function handleAddPlaceSubmit (inputData) {
+    setPlaceUpdateButtonName('Сохранение...');
     api.addCard(inputData)
     .then((newCard) => {
       setCards([newCard, ...cards]);
       closeAllPopups();
     })
-
+    .catch(err => console.log(err))
+    .finally(() => {
+      setPlaceUpdateButtonName('Создать');
+    });
   }
 
 
@@ -119,11 +134,11 @@ function App() {
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
       <Footer />
 
-      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} buttonName={avatarUpdateButtonName}/>
 
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} buttonName={userUpdateButtonName}/>
 
-      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} buttonName={placeUpdateButtonName}/>
 
       <PopupWithForm title='Вы уверены?' name='confirmation' isOpen={isDeleteCardPopupOpen} buttonName='Да' onClose={closeAllPopups}/>
 
