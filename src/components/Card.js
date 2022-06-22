@@ -13,17 +13,21 @@ function Card ({card, onCardClick, onCardLike, onCardDelete}) {
     `card__heart ${isLiked ? 'card__heart_active' : ''}`
   );
 
+
   function handleClick() {
     onCardClick(card);
   }
+
 
   function handleLikeClick() {
     onCardLike(card);
   }
 
+
   function handleDeleteClick () {
     onCardDelete(card);
   }
+
 
   return (
     <li className="card">

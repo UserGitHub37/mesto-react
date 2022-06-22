@@ -13,7 +13,6 @@ import { CurrentUserContext } from '../../src/contexts/CurrentUserContext';
 
 
 function App() {
-
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -73,9 +72,11 @@ function App() {
     setIsEditAvatarPopupOpen(true);
   }
 
+
   function handleEditProfileClick () {
     setIsEditProfilePopupOpen(true);
   }
+
 
   function handleAddPlaceClick () {
     setIsAddPlacePopupOpen(true);
@@ -146,6 +147,7 @@ function App() {
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     </CurrentUserContext.Provider>
   );
+
 }
 
 export default App;
