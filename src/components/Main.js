@@ -1,10 +1,9 @@
-import React from 'react';
+import { useContext } from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../../src/contexts/CurrentUserContext';
 
-
 function Main ({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete }) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="content page__content">
@@ -26,7 +25,13 @@ function Main ({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, on
           <ul className="elements__wrapper">
 
             {cards.map((card) => (
-              <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete}/>
+              <Card
+                key={card._id}
+                card={card}
+                onCardClick={onCardClick}
+                onCardLike={onCardLike}
+                onCardDelete={onCardDelete}
+              />
             ))}
 
           </ul>
@@ -34,7 +39,6 @@ function Main ({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, on
 
       </main>
   );
-
 }
 
 export default Main;

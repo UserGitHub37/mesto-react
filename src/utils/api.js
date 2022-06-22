@@ -4,7 +4,6 @@ class Api {
     this._headers = options.headers;
   }
 
-
   _checkPromise(res) {
     if (res.ok) {
       return res.json();
@@ -13,14 +12,12 @@ class Api {
   return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-
   getUserInfo() {
     return fetch(`${this._baseUrl}users/me`, {
         method: 'GET',
         headers: this._headers,
     }).then(this._checkPromise);
   }
-
 
   setUserInfo(data) {
     return fetch(`${this._baseUrl}users/me`, {
@@ -30,7 +27,6 @@ class Api {
     }).then(this._checkPromise);
   }
 
-
   setUserAvatar(data) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
         method: 'PATCH',
@@ -39,14 +35,12 @@ class Api {
     }).then(this._checkPromise);
   }
 
-
   getCardList() {
     return fetch(`${this._baseUrl}cards`, {
         method: 'GET',
         headers: this._headers,
     }).then(this._checkPromise);
   }
-
 
   _setLike(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
@@ -55,7 +49,6 @@ class Api {
     }).then(this._checkPromise);
   }
 
-
   _removeLike(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
         method: 'DELETE',
@@ -63,11 +56,9 @@ class Api {
     }).then(this._checkPromise);
   }
 
-
   changeLikeCardStatus(cardId, isLiked) {
     return isLiked ? this._setLike(cardId) : this._removeLike(cardId);
   }
-
 
   addCard(data) {
     return fetch(`${this._baseUrl}cards`, {
@@ -77,14 +68,12 @@ class Api {
     }).then(this._checkPromise);
   }
 
-
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}`, {
         method: 'DELETE',
         headers: this._headers
     }).then(this._checkPromise);
   }
-
 }
 
 const api = new Api({

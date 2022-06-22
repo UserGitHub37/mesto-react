@@ -14,9 +14,9 @@
   * Управляемые компоненты
 
 
-[Ссылка на README.md проекта "mesto"](https://github.com/UserGitHub37/mesto/blob/main/src/README.md)
-[Чеклист для самопроверки. 10 Спринт.](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-10.pdf)
-[Чеклист для самопроверки. 11 Спринт.](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-11.pdf)
+  * [Ссылка на README.md проекта "mesto"](https://github.com/UserGitHub37/mesto/blob/main/src/README.md)
+  * [Чеклист для самопроверки. 10 Спринт.](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-10.pdf)
+  * [Чеклист для самопроверки. 11 Спринт.](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-11.pdf)
 
 На данный момент функционал из проекта "mesto" перенесен в проект "mesto-react", за исключением валидации форм.
 

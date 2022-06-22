@@ -6,7 +6,6 @@ function Footer () {
       <p className="footer__author">&copy;&nbsp;{currentYear} Mesto Russia</p>
     </footer>
   );
-
 }
 
 export default Footer;
