@@ -17,13 +17,13 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [avatarUpdateButtonName, setAvatarUpdateButtonName] = React.useState('Сохранить');
   const [userUpdateButtonName, setUserUpdateButtonName] = React.useState('Сохранить');
   const [placeUpdateButtonName, setPlaceUpdateButtonName] = React.useState('Создать');
+  const [cardToDelete, setCardToDelete] = React.useState(null);
 
 
   React.useEffect(() => {
@@ -51,9 +51,10 @@ function App() {
   }
 
 
-  function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
-      setCards((state) => state.filter((c) => c._id !== card._id));
+  function handleCardDelete() {
+    api.deleteCard(cardToDelete._id).then(() => {
+      setCards((state) => state.filter((c) => c._id !== cardToDelete._id));
+      closeAllPopups();
     })
     .catch(err => console.log(err));
   }
@@ -63,8 +64,8 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setIsDeleteCardPopupOpen(false);
     setSelectedCard(null);
+    setCardToDelete(null);
   }
 
 
@@ -131,7 +132,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
+      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={setCardToDelete}/>
       <Footer />
 
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} buttonName={avatarUpdateButtonName}/>
@@ -140,7 +141,7 @@ function App() {
 
       <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} buttonName={placeUpdateButtonName}/>
 
-      <PopupWithForm title='Вы уверены?' name='confirmation' isOpen={isDeleteCardPopupOpen} buttonName='Да' onClose={closeAllPopups}/>
+      <PopupWithForm title='Вы уверены?' name='confirmation' isOpen={Boolean(cardToDelete)} buttonName='Да' onClose={closeAllPopups} onSubmit={handleCardDelete}/>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     </CurrentUserContext.Provider>
