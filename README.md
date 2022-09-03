@@ -2,6 +2,12 @@
 
 ### Сервис Mesto: интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 
+* * *
+
+#### Этот проект (mesto-react) доработан в проекте ["react-mesto-auth"](https://github.com/UserGitHub37/react-mesto-auth) и объединен с бэкендом в fullstack-проекте ["react-mesto-api-full"](https://github.com/UserGitHub37/react-mesto-api-full)
+
+* * *
+
 Проект "mesto-react" создан с помощью JavaScript-библиотеки React, на основе проекта ["mesto"](https://github.com/UserGitHub37/mesto/blob/main/src/README.md), написанного с помощью нативного JavaScript.
 
 В проекте "mesto-react" использован:
@@ -22,6 +28,21 @@
 
 #### Планируемые доработки проекта:
 * добавить в проект валидацию форм
+
+* * *
+
+#### Краткая история развития проекта "Mesto":
+- ["mesto"](https://github.com/UserGitHub37/mesto), написан на чистом JavaScript с использованием сборщика модулей Webpack
+
+- ["mesto-react"](https://github.com/UserGitHub37/mesto-react), переписан с чистого JavaScript на React
+
+- ["react-mesto-auth"](https://github.com/UserGitHub37/react-mesto-auth) дабавлено создание пользователей, их аутентификация и авторизация
+
+- ["express-mesto-gha"](https://github.com/UserGitHub37/express-mesto-gha) написан backend для проекта "mesto"
+
+- ["react-mesto-api-full"](https://github.com/UserGitHub37/react-mesto-api-full) fullstack приложение, включающее фронтенд и бэкенд части приложения
+
+По мере развития проект обрастал дополнительным функционалом, подробное описание которого можно посмотреть в README.md соответствующих проектов.
 
 * * *
 
